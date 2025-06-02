@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>My Portfolio Flipbook</title>
-  <link rel="stylesheet" href="3dflipbook/css/white-book-view.css">
+  <link rel="stylesheet" href="3dflipbook/css/white-book-view.css" />
   <style>
     body {
       margin: 0;
@@ -25,10 +25,11 @@
 <script src="3dflipbook/js/pdf.min.js"></script>
 <script src="3dflipbook/js/3dflipbook.min.js"></script>
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
     $('#flipbook-container').FlipBook({
       pdf: 'my-portfolio.pdf',
-      webgl: true
+      webgl: true,
+      template: '3dflipbook/templates/default-book-view.html'
     });
   });
 </script>
