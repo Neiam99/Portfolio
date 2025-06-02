@@ -2,35 +2,34 @@
 <html>
 <head>
     <title>3D Portfolio Flipbook</title>
-    <!-- 3D Flip Book Library -->
+    <!-- Correct CDN links for 3D Flip Book -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/3d-flip-book@1.0.3/dist/3d-flip-book.min.css">
     <script src="https://cdn.jsdelivr.net/npm/3d-flip-book@1.0.3/dist/3d-flip-book.min.js"></script>
     <style>
         body {
-            background: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
         }
         flip-book {
             width: 90%;
             max-width: 900px;
-            height: 70vh;
+            height: 600px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
-    <!-- Load your existing PDF with 3D effects -->
-    <flip-book
-        src="portfolio.pdf"  <!-- Your already-uploaded PDF -->
-        perspective="2000"
-        page-shadow="true"
-        shading="soft"
-        controls="scroll,click"
-    ></flip-book>
+    <!-- Using absolute path to your PDF -->
+    <flip-book src="https://neiam99.github.io/Portfolio/portfolio.pdf"></flip-book>
+    
+    <!-- Fallback message -->
+    <noscript>
+        <h2>Please enable JavaScript to view this 3D flipbook.</h2>
+        <a href="https://neiam99.github.io/Portfolio/portfolio.pdf">Download PDF instead</a>
+    </noscript>
 </body>
 </html>
