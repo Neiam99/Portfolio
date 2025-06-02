@@ -4,11 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Architecture Portfolio</title>
-  <!-- Favicon Fix -->
   <link rel="icon" href="data:,">
-  
-  <!-- 3D Flip Book CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/3d-flip-book@2.0.1/dist/3d-flip-book.min.css">
   <style>
     body {
       margin: 0;
@@ -36,31 +32,12 @@
 <body>
   <h1>My Architecture Portfolio</h1>
   
-  <!-- 3D Flipbook Container -->
   <div id="flipbook-container">
-    <flip-book src="my-portfolio.pdf"
-               perspective="2000"
-               shading="soft"
-               controls="scroll,click"
-               page-shadow="true">
-    </flip-book>
+    <iframe src="my-portfolio.pdf" width="100%" height="100%" style="border:none;"></iframe>
   </div>
 
-  <!-- Download Link -->
   <a href="my-portfolio.pdf" download class="download-link">
     📄 Download PDF Version
   </a>
-
-  <!-- 3D Flip Book JS -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/3d-flip-book@2.0.1/dist/3d-flip-book.min.js"></script>
-  
-  <script>
-    // Simple error handling
-    document.querySelector('flip-book').addEventListener('error', function(e) {
-      console.error('Flipbook error:', e.detail);
-      alert('3D viewer failed to load. Click the download link instead.');
-    });
-  </script>
 </body>
 </html>
