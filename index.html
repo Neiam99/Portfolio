@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Architecture Portfolio</title>
-  <link rel="stylesheet" href="3dflipbook/css/3dflipbook.style.css" />
-  <link rel="stylesheet" href="3dflipbook/css/font-awesome.min.css" />
   <style>
     html, body {
       margin: 0;
@@ -35,16 +33,8 @@
       pdf: 'my-portfolio.pdf',
       template: {
         html: '3dflipbook/templates/default-book-view.html',
-        styles: ['3dflipbook/css/3dflipbook.style.css'],
-        script: '3dflipbook/js/3dflipbook.min.js',
-        sounds: {
-          startFlip: '3dflipbook/sounds/start-flip.mp3',
-          endFlip: '3dflipbook/sounds/end-flip.mp3'
-        }
-      },
-      propertiesCallback: function(props) {
-        props.page.depth /= 2;
-        return props;
+        styles: [],
+        script: '3dflipbook/js/3dflipbook.min.js'
       }
     });
   </script>
