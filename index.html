@@ -1,108 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Interactive 3D Portfolio</title>
-    <!-- Favicon fix -->
-    <link rel="icon" href="data:,">
-    
-    <!-- 3D Flip Book Resources -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/3d-flip-book@1.0.3/dist/3d-flip-book.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/3d-flip-book@1.0.3/dist/3d-flip-book.min.js"></script>
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            background: #f0f2f5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Arial', sans-serif;
-        }
-        #flipbook-container {
-            width: 90%;
-            max-width: 900px;
-            height: 600px;
-            margin: 20px auto;
-            position: relative;
-            border: 1px solid #ddd;
-            background: white;
-        }
-        #loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        #error-message {
-            display: none;
-            color: #d32f2f;
-            text-align: center;
-            padding: 20px;
-        }
-        @media (max-width: 768px) {
-            #flipbook-container {
-                height: 400px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Architecture Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    a {
+      color: #007acc;
+      font-size: 20px;
+      text-decoration: none;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    embed {
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <h1>My Portfolio</h1>
-    
-    <div id="flipbook-container">
-        <div id="loading">Loading 3D Flipbook...</div>
-        <div id="error-message"></div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('flipbook-container');
-            const loading = document.getElementById('loading');
-            const errorMsg = document.getElementById('error-message');
-            
-            // First verify the PDF exists
-            fetch('my-portfolio.pdf')  // ← Changed to your actual filename
-                .then(response => {
-                    if (!response.ok) throw new Error('PDF not found');
-                    
-                    // Create flipbook after confirming PDF exists
-                    const flipbook = document.createElement('flip-book');
-                    flipbook.setAttribute('src', 'my-portfolio.pdf');  // ← Changed here too
-                    flipbook.setAttribute('perspective', '2000');
-                    flipbook.setAttribute('shading', 'soft');
-                    flipbook.setAttribute('controls', 'scroll,click');
-                    
-                    flipbook.addEventListener('ready', function() {
-                        loading.style.display = 'none';
-                    });
-                    
-                    flipbook.addEventListener('error', function(e) {
-                        loading.style.display = 'none';
-                        errorMsg.style.display = 'block';
-                        errorMsg.innerHTML = `
-                            <h3>Failed to load flipbook</h3>
-                            <p>The 3D viewer couldn't initialize</p>
-                            <a href="my-portfolio.pdf" download>Download PDF instead</a>  <!-- Changed here -->
-                        `;
-                        console.error('Flipbook error:', e.detail);
-                    });
-                    
-                    container.appendChild(flipbook);
-                })
-                .catch(error => {
-                    loading.style.display = 'none';
-                    errorMsg.style.display = 'block';
-                    errorMsg.innerHTML = `
-                        <h3>Error Loading PDF</h3>
-                        <p>${error.message}</p>
-                        <p>Please check if "my-portfolio.pdf" exists.</p>  <!-- Changed here -->
-                    `;
-                    console.error('PDF loading failed:', error);
-                });
-        });
-    </script>
+  <h1>Welcome to My Architecture Portfolio</h1>
+  <p>Click the link below to view my portfolio PDF:</p>
+  <a href="my-portfolio.pdf" target="_blank" rel="noopener noreferrer">📄 View Portfolio PDF</a>
+  <br />
+  <embed src="my-portfolio.pdf" type="application/pdf" width="80%" height="600px" />
 </body>
 </html>
