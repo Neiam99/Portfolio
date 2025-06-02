@@ -1,39 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Architecture Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-      background-color: #f5f5f5;
-      color: #333;
-    }
-    a {
-      color: #007acc;
-      font-size: 20px;
-      text-decoration: none;
-      margin-bottom: 20px;
-      display: inline-block;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    embed {
-      border: 1px solid #ccc;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin-top: 20px;
-    }
-  </style>
+    <title>3D Portfolio Flipbook</title>
+    <link rel="icon" href="data:,">
+    
+    <!-- Updated to latest stable versions -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/3d-flip-book@2.0.1/dist/3d-flip-book.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/3d-flip-book@2.0.1/dist/3d-flip-book.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #book-container {
+            width: 90vw;
+            max-width: 900px;
+            height: 70vh;
+            margin: 20px auto;
+            position: relative;
+        }
+        #loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        #fallback {
+            display: none;
+            text-align: center;
+            color: #d32f2f;
+        }
+        @media (max-width: 768px) {
+            #book-container {
+                height: 60vh;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Welcome to My Architecture Portfolio</h1>
-  <p>Click the link below to view my portfolio PDF:</p>
-  <a href="my-portfolio.pdf" target="_blank" rel="noopener noreferrer">📄 View Portfolio PDF</a>
-  <br />
-  <embed src="my-portfolio.pdf" type="application/pdf" width="80%" height="600px" />
+    <h1>My Portfolio</h1>
+    
+    <div id="book-container">
+        <div id="loader">
+            <p>Loading 3D Flipbook...</p>
+            <p>This may take a moment for larger files</p>
+        </div>
+        <div id="fallback"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('book-container');
+            const loader = document.getElementById('loader');
+            const fallback = document.getElementById('fallback');
+            
+            // 1. First verify PDF exists using absolute URL
+            const pdfUrl = 'https://neiam99.github.io/Portfolio/my-portfolio.pdf';
+            
+            fetch(pdfUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error('PDF not found');
+                    
+                    // 2. Create flipbook with absolute URL
+                    const flipbook = document.createElement('flip-book');
+                    flipbook.setAttribute('src', pdfUrl);
+                    flipbook.setAttribute('perspective', '1800');
+                    flipbook.setAttribute('page-shadow', 'true');
+                    flipbook.setAttribute('shading', 'soft');
+                    flipbook.setAttribute('controls', 'scroll,click');
+                    
+                    // 3. Event listeners
+                    flipbook.addEventListener('ready', () => {
+                        loader.style.display = 'none';
+                    });
+                    
+                    flipbook.addEventListener('error', (e) => {
+                        showError(`3D Viewer Error: ${e.detail?.message || 'Unknown error'}`);
+                    });
+                    
+                    container.appendChild(flipbook);
+                    
+                    // 4. Timeout fallback
+                    setTimeout(() => {
+                        if (loader.style.display !== 'none') {
+                            showError('Loading timed out. Your PDF might be too large.');
+                        }
+                    }, 15000);
+                })
+                .catch(err => {
+                    showError(`Failed to load PDF: ${err.message}`);
+                });
+                
+            function showError(message) {
+                loader.style.display = 'none';
+                fallback.style.display = 'block';
+                fallback.innerHTML = `
+                    <h3>Error Loading Flipbook</h3>
+                    <p>${message}</p>
+                    <a href="${pdfUrl}" download 
+                       style="display: inline-block; margin-top: 15px; padding: 8px 16px; 
+                              background: #2d3748; color: white; text-decoration: none; border-radius: 4px;">
+                        Download PDF Instead
+                    </a>
+                    <p>If problems persist, try a smaller PDF file (under 50MB recommended)</p>
+                `;
+                console.error('Flipbook error:', message);
+            }
+        });
+    </script>
 </body>
 </html>
