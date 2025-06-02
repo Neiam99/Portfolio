@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Interactive 3D Portfolio</title>
-    <!-- Favicon fix to prevent 404 errors -->
+    <!-- Favicon fix -->
     <link rel="icon" href="data:,">
     
     <!-- 3D Flip Book Resources -->
@@ -27,6 +27,8 @@
             height: 600px;
             margin: 20px auto;
             position: relative;
+            border: 1px solid #ddd;
+            background: white;
         }
         #loading {
             position: absolute;
@@ -53,46 +55,53 @@
     <div id="flipbook-container">
         <div id="loading">Loading 3D Flipbook...</div>
         <div id="error-message"></div>
-        <!-- Flipbook will be inserted here by JavaScript -->
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.getElementById('flipbook-container');
+            const loading = document.getElementById('loading');
             const errorMsg = document.getElementById('error-message');
             
-            try {
-                const flipbook = document.createElement('flip-book');
-                flipbook.setAttribute('src', 'portfolio.pdf');
-                flipbook.setAttribute('perspective', '2000');
-                flipbook.setAttribute('shading', 'soft');
-                flipbook.setAttribute('controls', 'scroll,click');
-                
-                flipbook.addEventListener('ready', function() {
-                    document.getElementById('loading').style.display = 'none';
-                });
-                
-                flipbook.addEventListener('error', function(e) {
-                    document.getElementById('loading').style.display = 'none';
+            // First verify the PDF exists
+            fetch('my-portfolio.pdf')  // ← Changed to your actual filename
+                .then(response => {
+                    if (!response.ok) throw new Error('PDF not found');
+                    
+                    // Create flipbook after confirming PDF exists
+                    const flipbook = document.createElement('flip-book');
+                    flipbook.setAttribute('src', 'my-portfolio.pdf');  // ← Changed here too
+                    flipbook.setAttribute('perspective', '2000');
+                    flipbook.setAttribute('shading', 'soft');
+                    flipbook.setAttribute('controls', 'scroll,click');
+                    
+                    flipbook.addEventListener('ready', function() {
+                        loading.style.display = 'none';
+                    });
+                    
+                    flipbook.addEventListener('error', function(e) {
+                        loading.style.display = 'none';
+                        errorMsg.style.display = 'block';
+                        errorMsg.innerHTML = `
+                            <h3>Failed to load flipbook</h3>
+                            <p>The 3D viewer couldn't initialize</p>
+                            <a href="my-portfolio.pdf" download>Download PDF instead</a>  <!-- Changed here -->
+                        `;
+                        console.error('Flipbook error:', e.detail);
+                    });
+                    
+                    container.appendChild(flipbook);
+                })
+                .catch(error => {
+                    loading.style.display = 'none';
                     errorMsg.style.display = 'block';
                     errorMsg.innerHTML = `
-                        <h3>Failed to load flipbook</h3>
-                        <p>${e.detail.message || 'Unknown error'}</p>
-                        <a href="portfolio.pdf" download>Download PDF instead</a>
+                        <h3>Error Loading PDF</h3>
+                        <p>${error.message}</p>
+                        <p>Please check if "my-portfolio.pdf" exists.</p>  <!-- Changed here -->
                     `;
+                    console.error('PDF loading failed:', error);
                 });
-                
-                container.appendChild(flipbook);
-            } catch (e) {
-                document.getElementById('loading').style.display = 'none';
-                errorMsg.style.display = 'block';
-                errorMsg.innerHTML = `
-                    <h3>Technical Error</h3>
-                    <p>${e.message}</p>
-                    <a href="portfolio.pdf" download>Download PDF</a>
-                `;
-                console.error('Flipbook initialization failed:', e);
-            }
         });
     </script>
 </body>
