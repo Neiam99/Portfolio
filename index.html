@@ -49,6 +49,11 @@
         margin: 0 0 20px 0;
       }
 
+      .zoom-wrapper {
+        transform: scale(1.4); /* Adjust this for more or less zoom */
+        transform-origin: top center;
+      }
+
       ._df_book {
         height: 80vh !important;
         width: 90vw !important;
@@ -59,13 +64,14 @@
   <body>
     <h2>Architekturportfolio</h2>
 
-    <div
-      class="_df_book"
-      webgl="true"
-      backgroundcolor="white"
-      source="./assets/books/my-portfolio.pdf"
-      id="df_manual_book"
-    >
+    <div class="zoom-wrapper">
+      <div
+        class="_df_book"
+        webgl="true"
+        backgroundcolor="white"
+        source="./assets/books/my-portfolio.pdf"
+        id="df_manual_book"
+      ></div>
     </div>
 
     <!-- jQuery  -->
