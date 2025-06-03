@@ -49,25 +49,31 @@
 .df-container .loading-info {
     position: absolute;
     top: 100%;
-    margin-top: 20px;
+    margin-top: 30px;
+    /* Increased margin-top for more spacing */
     margin-left: 5px;
-    padding: 6px 20px;
+    padding: 12px 30px;
+    /* Increased padding for bigger font */
     background-color: rgba(0, 0, 0, 0.3);
     font-style: italic;
     border-radius: 5px;
-    font-size: 50px;
-    max-height: 30px;
+    font-size: 30px;
+    /* Bigger font */
+    max-height: 60px;
+    /* Adjusted max-height */
     color: #fff;
-    max-width: 200px;
+    max-width: 300px;
+    /* Wider box */
     transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
     left: 50%;
-    opacity: .7;
-    transition: .3s top ease;
-    -webkit-transition: .3s top ease
+    opacity: 0.7;
+    transition: 0.3s top ease;
+    -webkit-transition: 0.3s top ease;
 }
+
 
 .loading-info.df-old-browser {
     color: gray;
