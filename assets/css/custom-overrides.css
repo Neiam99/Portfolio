@@ -1,0 +1,5 @@
+/* Increase font size for the Flipbook Control Bar */
+.df-control-bar,
+.df-control-bar * {
+  font-size: 18px !important;
+}
