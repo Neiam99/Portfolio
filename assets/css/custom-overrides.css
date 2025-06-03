@@ -1,5 +1,9 @@
-/* Increase font size for the Flipbook Control Bar */
-.df-control-bar,
-.df-control-bar * {
-  font-size: 40px !important;
+/* Target DFlip toolbar buttons and text */
+.df-toolbar,
+.df-toolbar .df-control,
+.df-toolbar .df-control i,
+.df-toolbar .df-control span,
+.df-toolbar .df-label {
+  font-size: 18px !important;
+  line-height: 1.5 !important;
 }
