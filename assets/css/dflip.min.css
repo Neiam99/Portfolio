@@ -692,7 +692,7 @@ span.df-share-title {
     /* increased height to fit bigger font */
     width: 100%;
     display: block;
-    top: 5px;
+    top: -1;
     padding-top: 18px;
     /* increased padding to center text vertically */
     line-height: 1.1em;
