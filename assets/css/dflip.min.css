@@ -688,25 +688,21 @@ span.df-share-title {
 
 .df-ui-page label {
     position: absolute;
-    height: 45px;
-    /* increased height to fit bigger font */
+    height: 30px;
     width: 100%;
     display: block;
-    top: 2px;
-    padding-top: 10px;
-    /* increased padding to center text vertically */
+    top: 0;
+    padding-top: 14px;
     line-height: 1.1em;
     color: #999;
-    font-size: 20px;
-    /* updated font size */
+    font-size: 13px;
     font-weight: normal;
     left: 0;
     cursor: pointer;
     background-color: transparent;
     z-index: 1;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
-
 
 .df-ui-share {
     float: left
