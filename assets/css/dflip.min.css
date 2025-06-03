@@ -307,7 +307,7 @@
 
 .df-book-wrapper .df-book-side-buttons:before {
     position: absolute;
-    font-size: 100px;
+    font-size: 30px;
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -610,7 +610,7 @@ span.df-share-title {
     width: 35px;
     right: 0;
     height: 40px;
-    font-size: 17px;
+    font-size: 50px;
     cursor: pointer;
     z-index: 2;
     display: inline-block;
